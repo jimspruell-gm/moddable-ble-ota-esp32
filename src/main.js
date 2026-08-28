@@ -96,6 +96,7 @@ class OTAPeripheral extends BLEPeripheral {
 		this.#clientConnected = false;
 		trace("BLE: client disconnected\n");
 		this.#sleepManager.onDisconnect();
+		this.#otaManager.abort();
 		this.#otaManager.allow();
 		// Restart advertising so new clients can connect
 		this.#startAdvertising();
