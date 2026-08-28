@@ -69,7 +69,7 @@ function applyPendingOTA() {
 class OTAPeripheral extends BLEPeripheral {
 	#otaManager;
 	#sleepManager;
-	#statusHandle = null;
+	#statusHandle = OTA_STATUS_CHAR_UUID;
 	#clientConnected = false;
 
 	constructor(otaManager, sleepManager) {
@@ -141,7 +141,7 @@ class OTAPeripheral extends BLEPeripheral {
 	}
 
 	#sendStatus(statusByte) {
-		if (!this.#clientConnected || this.#statusHandle === null) return;
+		if (!this.#clientConnected) return;
 		try {
 			this.notifyCharacteristic(this.#statusHandle, Uint8Array.of(statusByte).buffer);
 		} catch (e) {
