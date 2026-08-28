@@ -1,0 +1,38 @@
+{
+  "include": [
+    "$(MODDABLE)/examples/manifest_base.json",
+    "$(MODULES)/bluetooth/manifest.json"
+  ],
+  "modules": {
+    "*": [
+      "./src/main",
+      "./src/ota-manager",
+      "./src/sleep-manager"
+    ]
+  },
+  "preload": [
+    "main"
+  ],
+  "config": {
+    "ssid": "",
+    "password": "",
+    "ota_service_uuid": "12345678-1234-1234-1234-123456789ABC",
+    "ota_data_char_uuid": "12345678-1234-1234-1234-123456789ABD",
+    "ota_commit_char_uuid": "12345678-1234-1234-1234-123456789ABE",
+    "device_name": "Moddable-OTA",
+    "sleep_timeout_ms": 30000,
+    "max_ota_size": 65536
+  },
+  "platforms": {
+    "esp32": {
+      "config": {
+        "esp32_ble_enable": 1,
+        "esp32_sleep_enable": 1,
+        "esp32_ble_role_peripheral": 1
+      },
+      "build": {
+        "ESP32_SUBCLASS": "esp32"
+      }
+    }
+  }
+}
